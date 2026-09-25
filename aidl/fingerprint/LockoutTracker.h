@@ -39,8 +39,8 @@ class LockoutTracker {
 
   private:
     int32_t mFailedCount;
-    int64_t mLockoutTimedStart;
-    LockoutMode mCurrentMode;
+    int64_t mLockoutTimedStart = 0;
+    LockoutMode mCurrentMode = LockoutMode::kNone;
 };
 
 }  // namespace aidl::android::hardware::biometrics::fingerprint
