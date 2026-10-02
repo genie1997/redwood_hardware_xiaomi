@@ -27,7 +27,9 @@ ndk::ScopedAStatus HighTouchPollingRate::getEnabled(bool* _aidl_return) {
         return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
     }
 
-    *_aidl_return = Trim(buf) == "1";
+    // focaltech reports a bare flag, goodix answers "touch report rate: 480HZ"
+    const std::string state = Trim(buf);
+    *_aidl_return = state == "1" || state.find("480") != std::string::npos;
     return ndk::ScopedAStatus::ok();
 }
 
